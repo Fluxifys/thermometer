@@ -61,7 +61,6 @@ void setup()
 
     if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDR))
     {
-        Serial.println("SSD1306 allocation failed. Check wiring and address!");
         while (1)
             ; // Halts if display is not found
     }
@@ -84,7 +83,6 @@ void loop()
     sensor.requestTemperatures();
     delay(750);
     outdoorTemp = sensor.getTempCByIndex(0);
-    Serial.printf("dhtt %0.2f, hum %d, out %0.2f\n", currentTemp, currentHum, outdoorTemp);
 
     // Check for sensor error (-999.0 is your error code)
     if (currentTemp != -999.0 && currentHum != -999.0)
@@ -139,19 +137,9 @@ void loop()
 
         display.display();
 
-        // --- 4. SERIAL DEBUG ---
-        if (millis() % 5000 < 50)
-        {
-            Serial.print("T=");
-            Serial.print(currentTemp);
-            Serial.print("C, H=");
-            Serial.print(currentHum);
-            Serial.println("%");
-        }
     }
     else
     {
-        Serial.println("Error: DHT22 reading failed!");
     }
 
     delay(200);
