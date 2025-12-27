@@ -22,10 +22,10 @@ Dht22 dht_sensor(DHT_DATA_PIN);
 OneWire oneWirePin(DS_DATA_PIN);
 DallasTemperature sensor(&oneWirePin);
 
-const char* WIFI_SSID = "WifiName";
-const char* WIFI_PASS = "WifiPass";
+const char *WIFI_SSID = "WifiName";
+const char *WIFI_PASS = "WifiPass";
 
-const char* TS_API_KEY = "API_KEY";
+const char *TS_API_KEY = "M1KOO38NN9XCSSCP";
 
 // --- INSTANCE ---
 ThingSpeakUploader uploader(WIFI_SSID, WIFI_PASS, TS_API_KEY);
@@ -54,7 +54,7 @@ void setup()
     {
         ;
     }
-    
+
     dht_sensor.begin();
     sensor.begin();
     Wire.begin(I2C_SDA_PIN, I2C_SCL_PIN);
@@ -72,7 +72,7 @@ void setup()
     display.println("Sensor /\n Internet fel.");
     display.display();
 
-    uploader.connectWiFi();
+    uploader.connectWiFi(5000); //Times out after 5s if no connection, displays locally for temp.
 }
 
 void loop()
@@ -136,7 +136,6 @@ void loop()
         }
 
         display.display();
-
     }
     else
     {

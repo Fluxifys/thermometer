@@ -11,7 +11,7 @@ public:
     ThingSpeakUploader(const char* ssid, const char* password, const char* apiKey);
     
     // Connects to Wi-Fi. Should be called in setup().
-    void connectWiFi();
+    bool connectWiFi(unsigned long timeoutMs);
 
     // Uploads the data to ThingSpeak. Returns true on success.
     bool uploadData(float indoorT, float indoorH, float outdoorT);
